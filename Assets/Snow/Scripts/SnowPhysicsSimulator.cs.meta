@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 029511d0111be464593421912161e971
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - shader: {fileID: 7200000, guid: 2df621297ed290d45bb9317b81ece3ec, type: 3}
+  - cameraInput: {instanceID: 0}
+  - snowMaterial: {fileID: 2100000, guid: bbda3b88aaed93e4cb7eba4b2248a365, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

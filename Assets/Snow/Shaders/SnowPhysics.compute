@@ -1,0 +1,29 @@
+﻿// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel SnowPhysicsUpdate
+#pragma kernel SnowFlashInput
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+float Width;
+float Height;
+sampler2D Input;
+sampler2D PreviousState;
+float ElapsedTime;
+RWTexture2D<float4> Result;
+float RecoveryTime;
+
+[numthreads(8, 8, 1)]
+void SnowPhysicsUpdate (uint3 id : SV_DispatchThreadID) {
+
+	float4 previousState = tex2Dlod(PreviousState, float4(id.x / Width, id.y / Height, 0, 0));	
+	float depth = tex2Dlod(Input, float4(id.x / Width, id.y / Height, 0, 0)).r;
+
+	previousState = float4(max(previousState.r - (ElapsedTime * RecoveryTime), depth), previousState.gba);
+	Result[id.xy] = previousState;
+}
+
+[numthreads(8, 8, 1)]
+void SnowFlashInput(uint3 id : SV_DispatchThreadID) {
+	
+	Result[id.xy] = float4(0, 0, 0, 1);
+}
